@@ -1,4 +1,4 @@
-import StudentInfo from './student-info ';
+import StudentInfo from '/cprg306-assigments/week-2/student-info.js';
 export default function Page() {
     return (
       <main>
