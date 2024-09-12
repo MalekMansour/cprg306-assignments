@@ -1,4 +1,7 @@
-const ItemList = [
+import Item from './item';
+
+const ItemList = () => {
+  const items = [
     {
       name: "milk, 4 L 🥛",
       quantity: 1,
@@ -60,3 +63,19 @@ const ItemList = [
       category: "household",
     },
   ];
+
+  return (
+    <ul className="space-y-4">
+      {items.map((item, index) => (
+        <Item
+          key={index}
+          name={item.name}
+          quantity={item.quantity}
+          category={item.category}
+        />
+      ))}
+    </ul>
+  );
+};
+
+export default ItemList;

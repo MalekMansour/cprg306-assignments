@@ -1,10 +1,12 @@
-import ItemList from './item-list'; 
+import ItemList from './item-list';
 
 const Page = () => {
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900">Shopping List</h1>
-      <ItemList/> 
+    <main className="min-h-screen bg-black-20 p-4">
+      <div className="max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-center text-white-700 mb-6">Shopping List</h1>
+        <ItemList />
+      </div>
     </main>
   );
 };
