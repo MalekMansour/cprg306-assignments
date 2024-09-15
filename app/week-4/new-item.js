@@ -18,13 +18,23 @@ const QuantityComponent = () => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: 'center', margin: '20px' }}>
       <h1>Quantity: {quantity}</h1>
-      <button onClick={decrement} disabled={quantity === 1}>
-        Decrement
+      <button 
+        onClick={decrement} 
+        disabled={quantity === 1}
+        aria-label="Decrease quantity"
+        style={{ fontSize: '20px', margin: '5px' }}
+      >
+        -
       </button>
-      <button onClick={increment} disabled={quantity === 20}>
-        Increment
+      <button 
+        onClick={increment} 
+        disabled={quantity === 20}
+        aria-label="Increase quantity"
+        style={{ fontSize: '20px', margin: '5px' }}
+      >
+        +
       </button>
     </div>
   );
