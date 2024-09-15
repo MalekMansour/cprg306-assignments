@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+"use client";
 
 const QuantityComponent = () => {
   const [quantity, setQuantity] = useState(1); 
