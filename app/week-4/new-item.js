@@ -33,8 +33,8 @@ export default function NewItem() {
 
       <button
         onClick={increment}
-        className={`border-2 border-blue-800 px-3 py-1 rounded-md ${
-          quantity === 20 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-800 text-white'
+        className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
+          quantity === 20 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
         }`}
         disabled={quantity === 20}
       >
