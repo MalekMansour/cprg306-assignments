@@ -21,8 +21,8 @@ export default function NewItem() {
     <div className="bg-[#1E201E] text-white p-5 rounded-md flex items-center justify-between">
       <button
         onClick={decrement}
-        className={`border-2 border-blue-500 px-3 py-1 rounded-md ${
-          quantity === 1 ? 'bg-[#D2E0FB] text-white cursor-not-allowed' : 'bg-white text-blue-500'
+        className={`border-2 border-blue-800 px-3 py-1 rounded-md ${
+          quantity === 1 ? 'bg-[#D2E0FB] text-white cursor-not-allowed' : 'bg-white text-blue-800'
         }`}
         disabled={quantity === 1}
       >
@@ -33,7 +33,7 @@ export default function NewItem() {
 
       <button
         onClick={increment}
-        className={`border-2 border-blue-500 px-3 py-1 rounded-md ${
+        className={`border-2 border-blue-800 px-3 py-1 rounded-md ${
           quantity === 20 ? 'bg-[#161D6F] text-white cursor-not-allowed' : 'bg-white text-blue-800'
         }`}
         disabled={quantity === 20}
