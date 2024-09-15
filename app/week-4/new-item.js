@@ -18,7 +18,7 @@ export default function NewItem() {
   };
 
   return (
-    <div className="bg-[#181C14] text-white p-5 rounded-md flex items-center justify-between">
+    <div className="bg-[#1E201E] text-white p-5 rounded-md flex items-center justify-between">
       <button
         onClick={decrement}
         className={`border-2 border-blue-500 px-3 py-1 rounded-md ${
