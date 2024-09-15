@@ -6,11 +6,15 @@ export default function NewItem() {
   const [quantity, setQuantity] = useState(1);
 
   const increment = () => {
-    setQuantity(prevQuantity => Math.min(prevQuantity + 1, 20));
+    if (quantity < 20) {
+      setQuantity(prevQuantity => prevQuantity + 1);
+    }
   };
 
   const decrement = () => {
-    setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1));
+    if (quantity > 1) {
+      setQuantity(prevQuantity => prevQuantity - 1);
+    }
   };
 
   return (
