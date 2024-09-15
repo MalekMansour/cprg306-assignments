@@ -14,11 +14,11 @@ export default function NewItem() {
   };
 
   return (
-    <div className="bg-#181C14 text-white p-5 rounded-md flex items-center justify-between">
+    <div className="bg-[#181C14] text-white p-5 rounded-md flex items-center justify-between">
       <button
         onClick={decrement}
-        className={`text-blue-500 px-3 py-1 rounded-md ${
-          quantity === 1 ? 'text-gray-500 cursor-not-allowed' : ''
+        className={`border-2 border-blue-500 px-3 py-1 rounded-md ${
+          quantity === 1 ? 'bg-[#161D6F] text-white cursor-not-allowed' : 'bg-white text-blue-500'
         }`}
         disabled={quantity === 1}
       >
@@ -29,8 +29,8 @@ export default function NewItem() {
 
       <button
         onClick={increment}
-        className={`text-blue-500 px-3 py-1 rounded-md ${
-          quantity === 20 ? 'text-gray-500 cursor-not-allowed' : ''
+        className={`border-2 border-blue-500 px-3 py-1 rounded-md ${
+          quantity === 20 ? 'bg-[#D2E0FB] text-white cursor-not-allowed' : 'bg-white text-blue-500'
         }`}
         disabled={quantity === 20}
       >
