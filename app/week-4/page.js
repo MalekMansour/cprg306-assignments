@@ -1,11 +1,9 @@
 import NewItem from './new-item';
 
-const Page = () => {
+export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-black">
       <NewItem />
     </div>
   );
-};
-
-export default Page;
+}
