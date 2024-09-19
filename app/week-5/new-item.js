@@ -4,33 +4,26 @@ import { useState } from 'react';
 
 export default function NewItem() {
   const [quantity, setQuantity] = useState(1);
-  const [name, setName] = useState(""); // Initializing name state
-  const [category, setCategory] = useState("produce"); // Initializing category state
-
-  // Form submission handler
+  const [name, setName] = useState(""); 
+  const [category, setCategory] = useState("produce");
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the form's default submission behavior
+    e.preventDefault(); 
 
-    // Create an item object with current state values
     const item = {
       name,
       quantity,
       category,
     };
 
-    // Log the item object to the console
     console.log(item);
 
-    // Display an alert with the current state of name, quantity, and category
     alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
 
-    // Reset the state variables to their initial values
     setName("");
     setQuantity(1);
     setCategory("produce");
   };
 
-  // Increment and decrement handlers for quantity
   const increment = () => {
     if (quantity < 20) {
       setQuantity(prevQuantity => prevQuantity + 1);
