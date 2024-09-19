@@ -45,7 +45,7 @@ export default function NewItem() {
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter item name"
         className="mb-4 p-2 text-black rounded-md"
-        required // Making the field required
+        required 
       />
 
       {/* Category Dropdown */}
