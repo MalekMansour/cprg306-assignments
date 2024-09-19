@@ -4,8 +4,33 @@ import { useState } from 'react';
 
 export default function NewItem() {
   const [quantity, setQuantity] = useState(1);
-  const [name, setName] = useState(""); 
+  const [name, setName] = useState(""); // Initializing name state
+  const [category, setCategory] = useState("produce"); // Initializing category state
 
+  // Form submission handler
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the form's default submission behavior
+
+    // Create an item object with current state values
+    const item = {
+      name,
+      quantity,
+      category,
+    };
+
+    // Log the item object to the console
+    console.log(item);
+
+    // Display an alert with the current state of name, quantity, and category
+    alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
+
+    // Reset the state variables to their initial values
+    setName("");
+    setQuantity(1);
+    setCategory("produce");
+  };
+
+  // Increment and decrement handlers for quantity
   const increment = () => {
     if (quantity < 20) {
       setQuantity(prevQuantity => prevQuantity + 1);
@@ -19,28 +44,70 @@ export default function NewItem() {
   };
 
   return (
-    <div className="bg-[#1E201E] text-white p-5 rounded-md flex items-center justify-between">
-      <button
-        onClick={decrement}
-        className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
-          quantity === 1 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
-        }`}
-        disabled={quantity === 1}
-      >
-        -
-      </button>
+    <form onSubmit={handleSubmit} className="bg-[#1E201E] text-white p-5 rounded-md flex flex-col items-center justify-between">
+      {/* Name Input Field */}
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter item name"
+        className="mb-4 p-2 text-black rounded-md"
+        required // Making the field required
+      />
 
-      <span className="text-lg mx-4">{quantity}</span>
-
-      <button
-        onClick={increment}
-        className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
-          quantity === 20 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
-        }`}
-        disabled={quantity === 20}
+      {/* Category Dropdown */}
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className="mb-4 p-2 text-black rounded-md"
       >
-        +
+        <option value="produce">Produce</option>
+        <option value="dairy">Dairy</option>
+        <option value="bakery">Bakery</option>
+        <option value="meat">Meat</option>
+        <option value="frozen">Frozen Foods</option>
+        <option value="canned">Canned Goods</option>
+        <option value="dry">Dry Goods</option>
+        <option value="beverages">Beverages</option>
+        <option value="snacks">Snacks</option>
+        <option value="household">Household</option>
+        <option value="other">Other</option>
+      </select>
+
+      {/* Quantity Controls */}
+      <div className="flex items-center justify-between w-full mb-4">
+        <button
+          type="button"
+          onClick={decrement}
+          className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
+            quantity === 1 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
+          }`}
+          disabled={quantity === 1}
+        >
+          -
+        </button>
+
+        <span className="text-lg mx-4">{quantity}</span>
+
+        <button
+          type="button"
+          onClick={increment}
+          className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
+            quantity === 20 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
+          }`}
+          disabled={quantity === 20}
+        >
+          +
+        </button>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="bg-green-500 text-white px-4 py-2 rounded-md"
+      >
+        Submit
       </button>
-    </div>
+    </form>
   );
 }
