@@ -48,7 +48,7 @@ const ItemList = () => {
         <button
           onClick={() => setGroupByCategory((prev) => !prev)}
           className={`px-4 py-2 rounded-lg ${
-            groupByCategory ? "bg-green-500 text-white" : "bg-red-300"
+            groupByCategory ? "bg-green-500 text-white" : "bg-red-500"
           }`}
         >
           Group by Category
