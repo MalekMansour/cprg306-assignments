@@ -8,7 +8,6 @@ const ItemList = () => {
   const [sortBy, setSortBy] = useState("name"); 
   const [groupByCategory, setGroupByCategory] = useState(false);
 
-  // Sort the items based on sortBy state
   const sortedItems = [...itemsData].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
