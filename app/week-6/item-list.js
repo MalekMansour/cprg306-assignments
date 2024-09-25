@@ -32,7 +32,7 @@ const ItemList = () => {
         <button
           onClick={() => setSortBy("name")}
           className={`px-4 py-2 rounded-lg ${
-            sortBy === "name" ? "bg-blue-500 text-white" : "bg-gray-200"
+            sortBy === "name" ? "bg-blue-600 text-white" : "bg-blue-300"
           }`}
         >
           Sort by Name
@@ -40,7 +40,7 @@ const ItemList = () => {
         <button
           onClick={() => setSortBy("category")}
           className={`px-4 py-2 rounded-lg ${
-            sortBy === "category" ? "bg-blue-500 text-white" : "bg-gray-200"
+            sortBy === "category" ? "bg-blue-600 text-white" : "bg-blue-300"
           }`}
         >
           Sort by Category
@@ -48,7 +48,7 @@ const ItemList = () => {
         <button
           onClick={() => setGroupByCategory((prev) => !prev)}
           className={`px-4 py-2 rounded-lg ${
-            groupByCategory ? "bg-green-500 text-white" : "bg-gray-200"
+            groupByCategory ? "bg-green-500 text-white" : "bg-red-300"
           }`}
         >
           Group by Category
