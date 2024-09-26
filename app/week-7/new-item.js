@@ -2,22 +2,22 @@
 
 import { useState } from 'react';
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) { 
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState(""); 
   const [category, setCategory] = useState("produce");
+
   const handleSubmit = (e) => {
     e.preventDefault(); 
 
     const item = {
+      id: Math.random().toString(36).substr(2, 9), 
       name,
       quantity,
       category,
     };
 
-    console.log(item);
-
-    alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
+    onAddItem(item);
 
     setName("");
     setQuantity(1);
@@ -38,7 +38,6 @@ export default function NewItem() {
 
   return (
     <form onSubmit={handleSubmit} className="bg-[#1E201E] text-white p-5 rounded-md flex flex-col items-center justify-between">
-      {/* Name Input Field */}
       <input
         type="text"
         value={name}
@@ -48,7 +47,6 @@ export default function NewItem() {
         required 
       />
 
-      {/* Category Dropdown */}
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
@@ -67,7 +65,6 @@ export default function NewItem() {
         <option value="other">Other</option>
       </select>
 
-      {/* Quantity Controls */}
       <div className="flex items-center justify-between w-full mb-4">
         <button
           type="button"
@@ -94,7 +91,6 @@ export default function NewItem() {
         </button>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         className="bg-green-500 text-white px-4 py-2 rounded-md"
