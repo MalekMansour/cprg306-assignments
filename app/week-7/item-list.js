@@ -1,106 +1,87 @@
-'use client';
+"use client"; 
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Item from './item';
+import itemsData from './items.json';
 
-export default function NewItem() {
-  const [quantity, setQuantity] = useState(1);
-  const [name, setName] = useState(""); 
-  const [category, setCategory] = useState("produce");
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
+const ItemList = () => {
+  const [sortBy, setSortBy] = useState("name"); 
+  const [groupByCategory, setGroupByCategory] = useState(false);
 
-    const item = {
-      name,
-      quantity,
-      category,
-    };
-
-    console.log(item);
-
-    alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
-
-    setName("");
-    setQuantity(1);
-    setCategory("produce");
-  };
-
-  const increment = () => {
-    if (quantity < 20) {
-      setQuantity(prevQuantity => prevQuantity + 1);
+  const sortedItems = [...itemsData].sort((a, b) => {
+    if (sortBy === "name") {
+      return a.name.localeCompare(b.name);
+    } else if (sortBy === "category") {
+      return a.category.localeCompare(b.category);
     }
-  };
+    return 0;
+  });
 
-  const decrement = () => {
-    if (quantity > 1) {
-      setQuantity(prevQuantity => prevQuantity - 1);
-    }
-  };
+  const groupedItems = groupByCategory
+    ? sortedItems.reduce((acc, item) => {
+        if (!acc[item.category]) acc[item.category] = [];
+        acc[item.category].push(item);
+        return acc;
+      }, {})
+    : null;
 
   return (
-    <form onSubmit={handleSubmit} className="bg-[#1E201E] text-white p-5 rounded-md flex flex-col items-center justify-between">
-      {/* Name Input Field */}
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter item name"
-        className="mb-4 p-2 text-black rounded-md"
-        required 
-      />
-
-      {/* Category Dropdown */}
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="mb-4 p-2 text-black rounded-md"
-      >
-        <option value="produce">Produce</option>
-        <option value="dairy">Dairy</option>
-        <option value="bakery">Bakery</option>
-        <option value="meat">Meat</option>
-        <option value="frozen">Frozen Foods</option>
-        <option value="canned">Canned Goods</option>
-        <option value="dry">Dry Goods</option>
-        <option value="beverages">Beverages</option>
-        <option value="snacks">Snacks</option>
-        <option value="household">Household</option>
-        <option value="other">Other</option>
-      </select>
-
-      {/* Quantity Controls */}
-      <div className="flex items-center justify-between w-full mb-4">
+    <div>
+      <div className="flex space-x-4 mb-4">
         <button
-          type="button"
-          onClick={decrement}
-          className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
-            quantity === 1 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
+          onClick={() => setSortBy("name")}
+          className={`px-4 py-2 rounded-lg ${
+            sortBy === "name" ? "bg-blue-600 text-white" : "bg-blue-300"
           }`}
-          disabled={quantity === 1}
         >
-          -
+          Sort by Name
         </button>
-
-        <span className="text-lg mx-4">{quantity}</span>
-
         <button
-          type="button"
-          onClick={increment}
-          className={`border-2 border-blue-900 px-3 py-1 rounded-md ${
-            quantity === 20 ? 'bg-[#B4B4B8] text-white cursor-not-allowed' : 'bg-blue-500 text-white'
+          onClick={() => setSortBy("category")}
+          className={`px-4 py-2 rounded-lg ${
+            sortBy === "category" ? "bg-blue-600 text-white" : "bg-blue-300"
           }`}
-          disabled={quantity === 20}
         >
-          +
+          Sort by Category
+        </button>
+        <button
+          onClick={() => setGroupByCategory((prev) => !prev)}
+          className={`px-4 py-2 rounded-lg ${
+            groupByCategory ? "bg-green-500 text-white" : "bg-red-500"
+          }`}
+        >
+          Group by Category
         </button>
       </div>
 
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className="bg-green-500 text-white px-4 py-2 rounded-md"
-      >
-        Submit
-      </button>
-    </form>
+      <ul className="space-y-4">
+        {groupByCategory
+          ? Object.keys(groupedItems).map((category) => (
+              <div key={category}>
+                <h3 className="capitalize text-xl font-bold">{category}</h3>
+                <ul>
+                  {groupedItems[category].map((item) => (
+                    <Item
+                      key={item.id}
+                      name={item.name}
+                      quantity={item.quantity}
+                      category={item.category}
+                    />
+                  ))}
+                </ul>
+              </div>
+            ))
+          : sortedItems.map((item) => (
+              <Item
+                key={item.id}
+                name={item.name}
+                quantity={item.quantity}
+                category={item.category}
+              />
+            ))}
+      </ul>
+    </div>
   );
-}
+};
+
+export default ItemList;
