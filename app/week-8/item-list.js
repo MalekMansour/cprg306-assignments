@@ -27,7 +27,7 @@ const ItemList = ({ items, onItemSelect }) => {
 
   return (
     <div>
-      <div className="flex space-x-24 mb-6">
+      <div className="flex space-x-55 mb-6">
         <button
           onClick={() => setSortBy("name")}
           className={`px-4 py-1 rounded-lg ${
