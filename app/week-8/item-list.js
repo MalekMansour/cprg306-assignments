@@ -30,7 +30,7 @@ const ItemList = ({ items, onItemSelect }) => {
       <div className="flex space-x-11 mb-4">
         <button
           onClick={() => setSortBy("name")}
-          className={`px-4 py-1 rounded-lg ${
+          className={`px-6 py-1 rounded-lg ${
             sortBy === "name" ? "bg-blue-600 text-white" : "bg-blue-300"
           }`}
         >
