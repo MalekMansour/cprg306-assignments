@@ -62,7 +62,7 @@ const MealIdeas = ({ ingredient }) => {
           meals.map((meal) => (
             <div
               key={meal.idMeal}
-              className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-64"
+              className="bg-gray-800 p-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-60" 
               onClick={() => handleMealClick(meal.idMeal)}
             >
               <h3 className="text-lg font-semibold">{meal.strMeal}</h3>
