@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import Item from './item';
 
-const ItemList = ({ items, onItemSelect }) => { 
-  const [sortBy, setSortBy] = useState("name"); 
+const ItemList = ({ items, onItemSelect }) => {
+  const [sortBy, setSortBy] = useState("name");
   const [groupByCategory, setGroupByCategory] = useState(false);
 
   const sortedItems = [...items].sort((a, b) => {
@@ -66,7 +66,7 @@ const ItemList = ({ items, onItemSelect }) => {
                       name={item.name}
                       quantity={item.quantity}
                       category={item.category}
-                      onSelect={() => onItemSelect(item)} /
+                      onSelect={() => onItemSelect(item)}
                     />
                   ))}
                 </ul>
