@@ -22,18 +22,47 @@ const MealIdeas = ({ ingredient }) => {
     }
   }, [ingredient]);
 
+  const handleMealClick = (idMeal) => {
+    setMeals((prevMeals) =>
+      prevMeals.map((meal) =>
+        meal.idMeal === idMeal ? { ...meal, showIngredients: !meal.showIngredients } : meal
+      )
+    );
+  };
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center text-white">Loading meals...</div>;
   }
 
   return (
-    <div>
-      <h2>Meal Ideas with {ingredient}</h2>
-      <ul>
+    <div className="text-white">
+      <h2 className="text-2xl font-bold mb-4">Meal Ideas with {ingredient}</h2>
+      <div className="flex flex-wrap justify-center gap-4">
         {meals.map((meal) => (
-          <li key={meal.idMeal}>{meal.strMeal}</li>
+          <div
+            key={meal.idMeal}
+            className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-64"
+            onClick={() => handleMealClick(meal.idMeal)}
+          >
+            <h3 className="text-lg font-semibold">{meal.strMeal}</h3>
+
+            {meal.showIngredients && (
+              <div className="mt-2">
+                <h4 className="font-semibold">Ingredients:</h4>
+                <ul>
+                  {Object.keys(meal)
+                    .filter((key) => key.includes("strIngredient") && meal[key])
+                    .map((key) => (
+                      <li key={key} className="text-gray-300">
+                        {meal[key]}: {meal[`strMeasure${key.slice(13)}`]}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
