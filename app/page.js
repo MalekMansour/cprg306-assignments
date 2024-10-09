@@ -10,6 +10,8 @@ export default function Page() {
         <h2><a href="/week-6" className="text-xl hover:text-green-500 transition">Week 6 Assignment</a></h2>
         <h2><a href="/week-7" className="text-xl hover:text-green-500 transition">Week 7 Assignment</a></h2>
         <h2><a href="/week-8" className="text-xl hover:text-green-500 transition">Week 8 Assignment</a></h2>
+        <h2><a href="/week-9" className="text-xl hover:text-green-500 transition">Week 9 Assignment</a></h2>
+
 
       </div>
 
