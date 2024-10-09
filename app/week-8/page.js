@@ -16,7 +16,6 @@ const Page = () => {
   const handleItemSelect = (item) => {
     const cleanedItemName = item.name
       .split(',')[0] 
-      .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|�[�-�]|�[�-�]|[\u2011-\u26FF]|�[�-�])/g, '') // Remove emojis
       .trim(); 
 
     setSelectedItemName(cleanedItemName); 
