@@ -18,7 +18,7 @@ const Page = () => {
 
   useEffect(() => {
     if (!user) {
-      router.push('/new-item');  // landing page path
+      router.push('./new-item');  
     }
   }, [user, router]);
 
