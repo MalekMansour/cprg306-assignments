@@ -10,7 +10,7 @@ const Page = () => {
   if (!user) {
     return (
       <main>
-        <h1>Shopping List</h1>
+        <h1 className="text-3xl font-bold text-white-700 mb-6">Shopping List</h1>
         <p>You need to be logged in to access this page.</p>
         <button onClick={gitHubSignIn}>Sign in with GitHub</button>
       </main>
