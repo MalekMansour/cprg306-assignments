@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 const Page = () => {
   const { user, firebaseSignOut } = useUserAuth();
-  const router = useRouter();
 
   if (!user) {
     router.push('/');
