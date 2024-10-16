@@ -1,19 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useUserAuth } from "./_utils/auth-context"; 
+import ShoppingList from "./shopping-list/page"; 
 
 const Page = () => {
-  const { user, firebaseSignOut } = useUserAuth();
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
   if (!user) {
-    return <p>You need to be logged in to access this page.</p>; 
+    return (
+      <main>
+        <h1>Shopping List</h1>
+        <p>You need to be logged in to access this page.</p>
+        <button onClick={gitHubSignIn}>Sign in with GitHub</button>
+      </main>
+    );
   }
 
   return (
     <main>
-      <h1>Shopping List</h1>
-      <p>Welcome, {user.displayName} ({user.email})</p>
+      <h1>Your Shopping List</h1>
+      <p>Welcome back, {user.displayName}!</p>
+      <ShoppingList /> 
       <button onClick={firebaseSignOut}>Logout</button>
     </main>
   );
