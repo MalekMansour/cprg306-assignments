@@ -16,7 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 let analytics;
 
-// Only initialize analytics if it's supported in this environment
 if (typeof window !== 'undefined') {
   isSupported().then((supported) => {
     if (supported) {
