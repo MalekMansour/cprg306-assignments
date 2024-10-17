@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   GithubAuthProvider,
-  GoogleAuthProvider, // Import Google provider
+  GoogleAuthProvider,
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { auth } from "./firebase";
@@ -23,29 +23,27 @@ export const AuthContextProvider = ({ children }) => {
       setUser(result.user);
     } catch (error) {
       if (error.code === "auth/account-exists-with-different-credential") {
-        const email = error.email; // Get the email associated with the account
+        const email = error.email;
         if (email) {
-          const methods = await fetchSignInMethodsForEmail(auth, email); // Fetch sign-in methods for the email
+          const methods = await fetchSignInMethodsForEmail(auth, email); 
           alert(`This email is associated with another account. Please sign in with one of the following methods: ${methods.join(", ")}`);
         } else {
           alert("This account exists with a different sign-in method. Please try signing in with an email/password or another provider.");
         }
       } else {
-        console.error(error); // Handle other errors here
+        console.error(error); 
         alert("An error occurred during sign-in. Please try again.");
       }
     }
   };
   
-
-  // Add Google Sign-In function
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       setUser(result.user);
     } catch (error) {
-      console.error(error); // Handle errors as needed
+      console.error(error); 
     }
   };
 
