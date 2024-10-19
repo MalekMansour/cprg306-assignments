@@ -3,7 +3,7 @@ import { useUserAuth } from '../_utils/auth-context';
 import ItemList from './item-list';
 import NewItem from './new-item'; 
 import MealIdeas from './meal-ideas'; 
-import { getItems, addItem } from '../_services/shopping-list-service';
+import { getItems, addItem, deleteItem } from '../_services/shopping-list-service'; 
 import { useRouter } from 'next/router';
 
 const Page = () => {
@@ -14,27 +14,46 @@ const Page = () => {
     return null;
   }
 
-  const [items, setItems] = useState([]); 
+  const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState('');
 
-  useEffect(() => {
-    const fetchItems = async () => {
+  const loadItems = async () => {
+    try {
       const fetchedItems = await getItems(user.uid); 
       setItems(fetchedItems); 
-    };
+    } catch (error) {
+      console.error('Error loading items:', error);
+    }
+  };
 
-    fetchItems();
+  useEffect(() => {
+    if (user && user.uid) {
+      loadItems(); 
+    }
   }, [user.uid]); 
 
   const handleAddItem = async (newItem) => {
-    const itemId = await addItem(user.uid, newItem);
-
-    setItems((prevItems) => [
-      ...prevItems,
-      { id: itemId, ...newItem } 
-    ]);
+    try {
+      const itemId = await addItem(user.uid, newItem);
+      setItems((prevItems) => [
+        ...prevItems,
+        { id: itemId, ...newItem }
+      ]);
+    } catch (error) {
+      console.error('Error adding item:', error);
+    }
   };
 
+  const handleDeleteItem = async (itemId) => {
+    try {
+      await deleteItem(user.uid, itemId);
+      setItems((prevItems) => prevItems.filter(item => item.id !== itemId));
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
+
+  // Handle selecting an item
   const handleItemSelect = (item) => {
     const cleanedItemName = item.name.split(',')[0].trim(); 
     setSelectedItemName(cleanedItemName); 
@@ -47,7 +66,7 @@ const Page = () => {
           <h1 className="text-3xl font-bold text-center text-white-700 mb-6">Shopping List</h1>
           <button onClick={firebaseSignOut} className="bg-red-500 text-white p-2 rounded mb-4">Logout</button>
           <NewItem onAddItem={handleAddItem} />
-          <ItemList items={items} onItemSelect={handleItemSelect} /> 
+          <ItemList items={items} onItemSelect={handleItemSelect} onDeleteItem={handleDeleteItem} /> 
         </div>
         <div className="flex-1">
           <MealIdeas ingredient={selectedItemName} /> 
