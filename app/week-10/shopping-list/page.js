@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUserAuth } from '../_utils/auth-context';
 import ItemList from './item-list';
 import NewItem from './new-item'; 
 import MealIdeas from './meal-ideas'; 
-import itemsData from './items.json';
+import { getItems, addItem } from '../_services/shopping-list-service';
 import { useRouter } from 'next/router';
 
 const Page = () => {
   const { user, firebaseSignOut } = useUserAuth();
-
+  
   if (!user) {
     router.push('/');
     return null;
   }
 
-  const [items, setItems] = useState(itemsData);
+  const [items, setItems] = useState([]); 
   const [selectedItemName, setSelectedItemName] = useState('');
 
-  const handleAddItem = (newItem) => {
-    setItems((prevItems) => [...prevItems, newItem]);
+  useEffect(() => {
+    const fetchItems = async () => {
+      const fetchedItems = await getItems(user.uid); 
+      setItems(fetchedItems); 
+    };
+
+    fetchItems();
+  }, [user.uid]); 
+
+  const handleAddItem = async (newItem) => {
+    const itemId = await addItem(user.uid, newItem);
+
+    setItems((prevItems) => [
+      ...prevItems,
+      { id: itemId, ...newItem } 
+    ]);
   };
 
   const handleItemSelect = (item) => {
