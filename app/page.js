@@ -11,6 +11,7 @@ export default function Page() {
         <h2><a href="/week-7" className="text-xl hover:text-green-500 transition">Week 7 Assignment</a></h2>
         <h2><a href="/week-8" className="text-xl hover:text-green-500 transition">Week 8 Assignment</a></h2>
         <h2><a href="/week-9" className="text-xl hover:text-green-500 transition">Week 9 Assignment</a></h2>
+        <h2><a href="/week-10" className="text-xl hover:text-green-500 transition">Week 10 Assignment</a></h2>
 
 
       </div>
@@ -21,7 +22,7 @@ export default function Page() {
           href="https://github.com/malekmansour" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-purple-200 hover:text-white transition"
+          className="text-purple-100 hover:text-white transition"
         >
           GitHub
         </a>
