@@ -24,7 +24,7 @@ export default function Page() {
           rel="noopener noreferrer"
           className="text-purple-200 hover:text-white transition"
         >
-          GitHub
+          Malek's GitHub
         </a>
       </footer>
     </main>
