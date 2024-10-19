@@ -22,7 +22,7 @@ export default function Page() {
           href="https://github.com/malekmansour" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-purple-100 hover:text-white transition"
+          className="text-purple-200 hover:text-white transition"
         >
           GitHub
         </a>
