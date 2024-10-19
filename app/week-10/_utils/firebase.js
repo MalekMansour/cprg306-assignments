@@ -29,4 +29,5 @@ if (typeof window !== 'undefined') {
 
 const auth = getAuth(app); 
 
+export const db = getFirestore(app);
 export { auth };
