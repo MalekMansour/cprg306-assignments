@@ -75,9 +75,13 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                       />
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="bg-red-500 text-white p-2 rounded ml-2"
+                        className="p-1 rounded ml-2"  
                       >
-                        Delete
+                        <img
+                          src="..assets/delete.png"  
+                          alt="Delete"
+                          className="w-4 h-4"     
+                        />
                       </button>
                     </li>
                   ))}
@@ -94,9 +98,13 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                 />
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="bg-red-500 text-white p-2 rounded ml-2"
+                  className="p-1 rounded ml-2"  
                 >
-                  Delete
+                  <img
+                    src="../assets/delete.png"  
+                    alt="Delete"
+                    className="w-4 h-4"      
+                  />
                 </button>
               </li>
             ))}
