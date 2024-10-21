@@ -72,7 +72,7 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                         onClick={() => onDeleteItem(item.id)}
                         className="bg-red-500 text-white p-2 rounded ml-2"
                       >
-                        Delete
+                        X
                       </button>
                     </li>
                   ))}
@@ -91,7 +91,7 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                   onClick={() => onDeleteItem(item.id)}
                   className="bg-red-500 text-white p-2 rounded ml-2"
                 >
-                  Delete
+                  X
                 </button>
               </li>
             ))}
