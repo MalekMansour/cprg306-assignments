@@ -1,5 +1,5 @@
 import { db } from "../_utils/firebase";
-import { collection, getDocs, addDoc, query } from "firebase/firestore";
+import { collection, getDocs, addDoc, query, doc, deleteDoc } from "firebase/firestore";
 
 export const getItems = async (userId) => {
   const items = [];
@@ -9,7 +9,6 @@ export const getItems = async (userId) => {
     const q = query(itemsRef);
     const querySnapshot = await getDocs(q);
     
-    // Add each document to the items array
     querySnapshot.forEach((doc) => {
       items.push({
         id: doc.id,      // Document ID
@@ -30,9 +29,23 @@ export const addItem = async (userId, item) => {
     
     const docRef = await addDoc(itemsRef, item);
     
-    return docRef.id;  
+    return docRef.id; 
   } catch (error) {
     console.error("Error adding item: ", error);
     return null; 
+  }
+};
+
+export const deleteItem = async (userId, itemId) => {
+  try {
+    const itemRef = doc(db, `users/${userId}/items/${itemId}`);
+    
+    // Delete the document
+    await deleteDoc(itemRef);
+    
+    return true; 
+  } catch (error) {
+    console.error("Error deleting item: ", error);
+    return false; 
   }
 };
