@@ -25,11 +25,6 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
       }, {})
     : null;
 
-  const handleDelete = (itemId) => {
-    console.log('Delete button pressed for item ID:', itemId);
-    onDeleteItem(itemId); 
-  };
-
   return (
     <div>
       <div className="flex space-x-11 mb-4">
@@ -74,14 +69,10 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                         onSelect={() => onItemSelect(item)}
                       />
                       <button
-                        onClick={() => handleDelete(item.id)}
-                        className="p-1 rounded ml-2"  
+                        onClick={() => onDeleteItem(item.id)}
+                        className="bg-red-500 text-white p-2 rounded ml-2"
                       >
-                        <img
-                          src="..assets/delete.png"  
-                          alt="Delete"
-                          className="w-4 h-4"     
-                        />
+                        Delete
                       </button>
                     </li>
                   ))}
@@ -97,14 +88,10 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                   onSelect={() => onItemSelect(item)}
                 />
                 <button
-                  onClick={() => handleDelete(item.id)}
-                  className="p-1 rounded ml-2"  
+                  onClick={() => onDeleteItem(item.id)}
+                  className="bg-red-500 text-white p-2 rounded ml-2"
                 >
-                  <img
-                    src="../assets/delete.png"  
-                    alt="Delete"
-                    className="w-4 h-4"      
-                  />
+                  Delete
                 </button>
               </li>
             ))}
