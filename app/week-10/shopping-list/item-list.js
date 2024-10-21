@@ -7,7 +7,6 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
   const [sortBy, setSortBy] = useState("name");
   const [groupByCategory, setGroupByCategory] = useState(false);
 
-  // Sorting items based on the selected sort option
   const sortedItems = [...items].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
@@ -17,7 +16,6 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
     return 0;
   });
 
-  // Grouping items by category if enabled
   const groupedItems = groupByCategory
     ? sortedItems.reduce((acc, item) => {
         const category = item.category;
@@ -29,12 +27,11 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
 
   const handleDelete = (itemId) => {
     console.log('Delete button pressed for item ID:', itemId);
-    onDeleteItem(itemId); // Calls the function passed from parent
+    onDeleteItem(itemId); 
   };
 
   return (
     <div>
-      {/* Sorting and Grouping Controls */}
       <div className="flex space-x-11 mb-4">
         <button
           onClick={() => setSortBy("name")}
@@ -62,7 +59,6 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
         </button>
       </div>
 
-      {/* Render Items */}
       <ul className="space-y-4">
         {groupByCategory
           ? Object.keys(groupedItems).map((category) => (
