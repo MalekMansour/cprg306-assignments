@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import Item from './item';
 
-const ItemList = ({ items, onItemSelect }) => {
+const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
   const [sortBy, setSortBy] = useState("name");
   const [groupByCategory, setGroupByCategory] = useState(false);
 
+  // Sorting items based on the selected sort option
   const sortedItems = [...items].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
@@ -16,6 +17,7 @@ const ItemList = ({ items, onItemSelect }) => {
     return 0;
   });
 
+  // Grouping items by category if enabled
   const groupedItems = groupByCategory
     ? sortedItems.reduce((acc, item) => {
         const category = item.category;
@@ -25,8 +27,14 @@ const ItemList = ({ items, onItemSelect }) => {
       }, {})
     : null;
 
+  const handleDelete = (itemId) => {
+    console.log('Delete button pressed for item ID:', itemId);
+    onDeleteItem(itemId); // Calls the function passed from parent
+  };
+
   return (
     <div>
+      {/* Sorting and Grouping Controls */}
       <div className="flex space-x-11 mb-4">
         <button
           onClick={() => setSortBy("name")}
@@ -54,6 +62,7 @@ const ItemList = ({ items, onItemSelect }) => {
         </button>
       </div>
 
+      {/* Render Items */}
       <ul className="space-y-4">
         {groupByCategory
           ? Object.keys(groupedItems).map((category) => (
@@ -61,25 +70,39 @@ const ItemList = ({ items, onItemSelect }) => {
                 <h3 className="capitalize text-xl font-bold">{category}</h3>
                 <ul>
                   {groupedItems[category].map((item) => (
-                    <Item
-                      key={item.id}
-                      name={item.name}
-                      quantity={item.quantity}
-                      category={item.category}
-                      onSelect={() => onItemSelect(item)}
-                    />
+                    <li key={item.id} className="flex justify-between items-center">
+                      <Item
+                        name={item.name}
+                        quantity={item.quantity}
+                        category={item.category}
+                        onSelect={() => onItemSelect(item)}
+                      />
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="bg-red-500 text-white p-2 rounded ml-2"
+                      >
+                        Delete
+                      </button>
+                    </li>
                   ))}
                 </ul>
               </div>
             ))
           : sortedItems.map((item) => (
-              <Item
-                key={item.id}
-                name={item.name}
-                quantity={item.quantity}
-                category={item.category}
-                onSelect={() => onItemSelect(item)}
-              />
+              <li key={item.id} className="flex justify-between items-center">
+                <Item
+                  name={item.name}
+                  quantity={item.quantity}
+                  category={item.category}
+                  onSelect={() => onItemSelect(item)}
+                />
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="bg-red-500 text-white p-2 rounded ml-2"
+                >
+                  Delete
+                </button>
+              </li>
             ))}
       </ul>
     </div>
