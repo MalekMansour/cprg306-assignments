@@ -27,7 +27,7 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
 
   return (
     <div>
-      <div className="flex space-x-11 mb-4">
+      <div className="flex space-x-10 mb-4">
         <button
           onClick={() => setSortBy("name")}
           className={`px-6 py-1 rounded-lg ${
@@ -61,7 +61,7 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                 <h3 className="capitalize text-xl font-bold">{category}</h3>
                 <ul>
                   {groupedItems[category].map((item) => (
-                    <li key={item.id} className="flex justify-between ">
+                    <li key={item.id} className="flex justify-between items-center">
                       <Item
                         name={item.name}
                         quantity={item.quantity}
