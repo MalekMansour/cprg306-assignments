@@ -61,38 +61,46 @@ const ItemList = ({ items, onItemSelect, onDeleteItem }) => {
                 <h3 className="capitalize text-xl font-bold">{category}</h3>
                 <ul>
                   {groupedItems[category].map((item) => (
-                    <li key={item.id} className="flex justify-between items-center">
+                    <li
+                      key={item.id}
+                      className="flex justify-start items-center space-x-0" 
+                    >
+                      <button
+                        onClick={() => onDeleteItem(item.id)}
+                        className="bg-red-500 text-white p-2 rounded mr-2" 
+                      >
+                        X
+                      </button>
                       <Item
                         name={item.name}
                         quantity={item.quantity}
                         category={item.category}
                         onSelect={() => onItemSelect(item)}
+                        className="flex-grow"
                       />
-                      <button
-                        onClick={() => onDeleteItem(item.id)}
-                        className="bg-red-500 text-white p-2 rounded ml-0"
-                      >
-                        X
-                      </button>
                     </li>
                   ))}
                 </ul>
               </div>
             ))
           : sortedItems.map((item) => (
-              <li key={item.id} className="flex justify-between items-center">
+              <li
+                key={item.id}
+                className="flex justify-start items-center space-x-2" 
+              >
+                <button
+                  onClick={() => onDeleteItem(item.id)}
+                  className="bg-red-500 text-white p-2 rounded mr-2" 
+                >
+                  X
+                </button>
                 <Item
                   name={item.name}
                   quantity={item.quantity}
                   category={item.category}
                   onSelect={() => onItemSelect(item)}
+                  className="flex-grow"
                 />
-                <button
-                  onClick={() => onDeleteItem(item.id)}
-                  className="bg-red-500 text-white p-2 rounded ml-0" 
-                >
-                  X
-                </button>
               </li>
             ))}
       </ul>
