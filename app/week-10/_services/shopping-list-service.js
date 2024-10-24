@@ -42,12 +42,14 @@ export const addItem = async (userId, item) => {
 export const deleteItem = async (userId, itemId) => {
   try {
     const itemRef = doc(db, `users/${userId}/items/${itemId}`);
+    console.log("Deleting item with ID:", itemId);
     
     await deleteDoc(itemRef);  
+    console.log("Item successfully deleted:", itemId);
     
     return true; 
   } catch (error) {
-    console.error("Error deleting item: ", error);
+    console.error("Error deleting item:", error);
     return false; 
   }
 };
