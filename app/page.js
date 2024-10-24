@@ -16,7 +16,6 @@ export default function Page() {
 
       </div>
 
-      {/* Footer Section */}
       <footer className="mt-8 py-4 text-center bg-gray-800 text-white">
         <a 
           href="https://github.com/malekmansour" 
