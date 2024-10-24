@@ -1,7 +1,6 @@
 import { db } from "../_utils/firebase";
 import { collection, getDocs, addDoc, query, doc, deleteDoc, getDoc } from "firebase/firestore";
 
-// Fetch items from Firestore
 export const getItems = async (userId) => {
   const items = [];
   
@@ -12,19 +11,18 @@ export const getItems = async (userId) => {
     
     querySnapshot.forEach((doc) => {
       items.push({
-        id: doc.id,      // Document ID
-        ...doc.data(),   // Document data
+        id: doc.id,     
+        ...doc.data(),   
       });
     });
     
     return items; 
   } catch (error) {
     console.error("Error fetching items: ", error);
-    throw error; // Throw the error instead of returning an empty array
+    throw error; 
   }
 };
 
-// Add item to Firestore
 export const addItem = async (userId, item) => {
   try {
     const itemsRef = collection(db, `users/${userId}/items`);
@@ -34,11 +32,10 @@ export const addItem = async (userId, item) => {
     return docRef.id; 
   } catch (error) {
     console.error("Error adding item: ", error);
-    throw error; // Throw the error instead of returning null
+    throw error;
   }
 };
 
-// Delete item from Firestore
 export const deleteItem = async (userId, itemId) => {
   try {
     const itemRef = doc(db, `users/${userId}/items/${itemId}`);
@@ -55,6 +52,6 @@ export const deleteItem = async (userId, itemId) => {
     }
   } catch (error) {
     console.error("Error deleting item:", error);
-    throw error; // Throw the error instead of returning false
+    throw error; 
   }
 };
