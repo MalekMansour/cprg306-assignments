@@ -1,5 +1,5 @@
 import { db } from "../_utils/firebase";
-import { collection, getDocs, addDoc, query, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, query, doc, deleteDoc, getDoc } from "firebase/firestore";
 
 // Fetch items from Firestore
 export const getItems = async (userId) => {
@@ -20,7 +20,7 @@ export const getItems = async (userId) => {
     return items; 
   } catch (error) {
     console.error("Error fetching items: ", error);
-    return []; 
+    throw error; // Throw the error instead of returning an empty array
   }
 };
 
@@ -34,7 +34,7 @@ export const addItem = async (userId, item) => {
     return docRef.id; 
   } catch (error) {
     console.error("Error adding item: ", error);
-    return null; 
+    throw error; // Throw the error instead of returning null
   }
 };
 
@@ -48,13 +48,13 @@ export const deleteItem = async (userId, itemId) => {
       console.log("Item exists, proceeding with deletion:", itemId);
       await deleteDoc(itemRef);  
       console.log("Item successfully deleted:", itemId);
+      return true;
     } else {
       console.log("No such document exists:", itemId);
+      return false;
     }
-    
-    return true; 
   } catch (error) {
     console.error("Error deleting item:", error);
-    return false; 
+    throw error; // Throw the error instead of returning false
   }
 };
