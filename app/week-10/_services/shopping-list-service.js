@@ -1,6 +1,7 @@
 import { db } from "../_utils/firebase";
 import { collection, getDocs, addDoc, query, doc, deleteDoc } from "firebase/firestore";
 
+// Fetch items from Firestore
 export const getItems = async (userId) => {
   const items = [];
   
@@ -23,6 +24,7 @@ export const getItems = async (userId) => {
   }
 };
 
+// Add item to Firestore
 export const addItem = async (userId, item) => {
   try {
     const itemsRef = collection(db, `users/${userId}/items`);
@@ -36,12 +38,12 @@ export const addItem = async (userId, item) => {
   }
 };
 
+// Delete item from Firestore
 export const deleteItem = async (userId, itemId) => {
   try {
     const itemRef = doc(db, `users/${userId}/items/${itemId}`);
     
-    // Delete the document
-    await deleteDoc(itemRef);
+    await deleteDoc(itemRef);  
     
     return true; 
   } catch (error) {
