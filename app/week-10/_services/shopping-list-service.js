@@ -42,10 +42,15 @@ export const addItem = async (userId, item) => {
 export const deleteItem = async (userId, itemId) => {
   try {
     const itemRef = doc(db, `users/${userId}/items/${itemId}`);
-    console.log("Deleting item with ID:", itemId);
+    const docSnap = await getDoc(itemRef);
     
-    await deleteDoc(itemRef);  
-    console.log("Item successfully deleted:", itemId);
+    if (docSnap.exists()) {
+      console.log("Item exists, proceeding with deletion:", itemId);
+      await deleteDoc(itemRef);  
+      console.log("Item successfully deleted:", itemId);
+    } else {
+      console.log("No such document exists:", itemId);
+    }
     
     return true; 
   } catch (error) {
